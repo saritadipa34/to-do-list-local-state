@@ -1,8 +1,8 @@
-
+import Todo from "./components/Todo";
 const App=()=>{
   return(
-    <div className="text-blue-800">
-      app
+    <div>
+      <Todo />
     </div>
   )
 }
