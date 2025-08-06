@@ -6,6 +6,14 @@ const Todo=()=>{
     const [tasks,setTasks]=useState([]);
     const [inputValue,setInputValue]=useState("");
 
+const handleDelete=(i)=>{
+    const deleteTask=tasks[i];
+    const filtered=tasks.filter((task)=>{
+        return task[i] !== deleteTask[i];
+    });
+    setTasks(filtered);
+}
+
 const handleEdit=(i)=>{
     const oldTask=tasks[i];
     const promptValue=prompt("Edit Task",oldTask);
@@ -46,7 +54,7 @@ tasks.map((task,i)=>(
     </div>
 <div className="w-1/4 h-10 px-2 max-h-20 text-wrap flex items-center justify-between gap-2 bg-white rounded-r-lg">
 <FaEdit onClick={()=>handleEdit(i)} className="text-2xl text-amber-400 cursor-pointer"/>
-<RiDeleteBin6Fill className="text-2xl text-red-400 cursor-pointer" />
+<RiDeleteBin6Fill onClick={()=>handleDelete(i)} className="text-2xl text-red-400 cursor-pointer" />
         </div>
      </div>
 ))
