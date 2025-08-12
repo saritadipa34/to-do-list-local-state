@@ -9,10 +9,18 @@ const Todo=()=>{
     });
     const [inputValue,setInputValue]=useState("");
     const [fullText,setFullText]=useState(null);
+    const [currentTime,setCurrentTime]=useState(new Date());
 
 useEffect(()=>{
 localStorage.setItem("localTodo",JSON.stringify(tasks));
 },[tasks]);
+
+useEffect(()=>{
+const interval=setInterval(()=>{
+setCurrentTime(new Date());
+},1000);
+return ()=>clearInterval(interval);
+},[])
 
 const handleText=(i)=>{
    setFullText(prev=>(prev === i ? null : i))
@@ -56,8 +64,8 @@ const handleAdd=()=>{
         <div className="min-h-[200px] w-[500px] bg-black text-white px-10 py-5">
              <h1 className="text-center font-bold text-xl">Todo List</h1>
              <div className="flex justify-between mb-5">
-             <p>24/06/1999</p>
-             <p>2:27:28</p>
+             <p>{currentTime.toLocaleDateString()}</p>
+             <p>{currentTime.toLocaleTimeString()}</p>
              </div>
              <div className="w-full flex mb-4">
              <input value={inputValue} onChange={handleInput} type="text" className=" px-2 outline-0 border-1 w-3/4 bg-white text-black h-10 rounded-l-lg" />
